@@ -1,0 +1,168 @@
+@import 'tailwindcss';
+
+:root {
+  /* Base neutrals — warm sand paper tone */
+  --background: oklch(97.8% 0.012 95);
+  --foreground: oklch(28% 0.03 150);
+
+  --card: oklch(99% 0.008 90);
+  --card-foreground: oklch(28% 0.03 150);
+
+  /* Sage — dominant brand color */
+  --sage: oklch(68% 0.06 150);
+  --sage-deep: oklch(38% 0.05 155);
+  --primary: oklch(52% 0.06 152);
+  --primary-foreground: oklch(98% 0.01 95);
+
+  /* Sand / warm beige — secondary */
+  --sand: oklch(90% 0.035 80);
+  --sand-warm: oklch(84% 0.045 70);
+  --secondary: oklch(90% 0.035 80);
+  --secondary-foreground: oklch(30% 0.03 155);
+
+  --muted: oklch(93% 0.018 85);
+  --muted-foreground: oklch(45% 0.025 140);
+
+  --accent: oklch(90% 0.035 80);
+  --accent-foreground: oklch(30% 0.03 155);
+
+  --border: oklch(87% 0.02 90);
+  --ring: oklch(60% 0.06 150);
+
+  --radius: 1.25rem;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --background: oklch(22% 0.018 155);
+    --foreground: oklch(93% 0.015 90);
+
+    --card: oklch(26% 0.02 155);
+    --card-foreground: oklch(93% 0.015 90);
+
+    --sage: oklch(70% 0.06 150);
+    --sage-deep: oklch(78% 0.05 140);
+    --primary: oklch(72% 0.06 150);
+    --primary-foreground: oklch(18% 0.02 155);
+
+    --sand: oklch(38% 0.035 75);
+    --sand-warm: oklch(44% 0.04 70);
+    --secondary: oklch(34% 0.03 80);
+    --secondary-foreground: oklch(92% 0.02 90);
+
+    --muted: oklch(30% 0.02 150);
+    --muted-foreground: oklch(72% 0.02 100);
+
+    --accent: oklch(34% 0.03 80);
+    --accent-foreground: oklch(92% 0.02 90);
+
+    --border: oklch(36% 0.02 150);
+    --ring: oklch(70% 0.06 150);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --background: oklch(22% 0.018 155);
+  --foreground: oklch(93% 0.015 90);
+
+  --card: oklch(26% 0.02 155);
+  --card-foreground: oklch(93% 0.015 90);
+
+  --sage: oklch(70% 0.06 150);
+  --sage-deep: oklch(78% 0.05 140);
+  --primary: oklch(72% 0.06 150);
+  --primary-foreground: oklch(18% 0.02 155);
+
+  --sand: oklch(38% 0.035 75);
+  --sand-warm: oklch(44% 0.04 70);
+  --secondary: oklch(34% 0.03 80);
+  --secondary-foreground: oklch(92% 0.02 90);
+
+  --muted: oklch(30% 0.02 150);
+  --muted-foreground: oklch(72% 0.02 100);
+
+  --accent: oklch(34% 0.03 80);
+  --accent-foreground: oklch(92% 0.02 90);
+
+  --border: oklch(36% 0.02 150);
+  --ring: oklch(70% 0.06 150);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-sand: var(--sand);
+  --color-sand-warm: var(--sand-warm);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --radius-2xl: calc(var(--radius) + 0.25rem);
+  --radius-xl: var(--radius);
+  --radius-lg: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.5rem);
+
+  --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-script: 'Parisienne', cursive;
+  --font-sans: 'Karla', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: light dark;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  /* Âncoras de seção não ficam escondidas atrás do header fixo */
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  a,
+  button {
+    touch-action: manipulation;
+  }
+
+  /* Anel de foco consistente, só em navegação por teclado */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-md);
+  }
+}

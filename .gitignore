@@ -1,0 +1,12 @@
+node_modules
+dist
+.output
+.vinxi
+.tanstack
+*.local
+.env
+.env.*
+.DS_Store
+
+# Gerado automaticamente pelo TanStack Router — não editar/versionar
+src/routeTree.gen.ts
