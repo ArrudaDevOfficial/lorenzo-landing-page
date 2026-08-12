@@ -95,6 +95,9 @@ export function HeroPortrait({ className }: Readonly<{ className?: string }>) {
 }
 
 const iconStroke = '#3f5a3a'
+/** Tom de destaque (parafuso, coração, linha de extração) — sálvia mais
+ * saturada, para casar com o verde da marca em vez de um marrom avulso. */
+const iconAccent = '#6b8257'
 
 /** Implante — dente com parafuso de implante */
 export function IconImplante({ className }: Readonly<{ className?: string }>) {
@@ -109,7 +112,7 @@ export function IconImplante({ className }: Readonly<{ className?: string }>) {
       />
       <path
         d="M60 84 L60 104"
-        stroke="#8a7250"
+        stroke={iconAccent}
         strokeWidth="6"
         strokeLinecap="round"
       />
@@ -135,10 +138,10 @@ export function IconSisos({ className }: Readonly<{ className?: string }>) {
       />
       <path
         d="M38 44 L82 88"
-        stroke="#b8543f"
+        stroke={iconAccent}
         strokeWidth="3"
         strokeLinecap="round"
-        opacity={0.6}
+        opacity={0.7}
       />
     </svg>
   )
@@ -170,7 +173,7 @@ export function IconProtocolo({ className }: Readonly<{ className?: string }>) {
       ))}
       <path
         d="M47 88 L47 98 M73 88 L73 98"
-        stroke="#8a7250"
+        stroke={iconAccent}
         strokeWidth="5"
         strokeLinecap="round"
       />
@@ -214,7 +217,7 @@ export function IconClinicaGeral({
       />
       <path
         d="M60 52 C57 47 49 47 47 54 C45 60 52 65 60 72 C68 65 75 60 73 54 C71 47 63 47 60 52 Z"
-        fill="#c47a63"
+        fill={iconAccent}
       />
     </svg>
   )
@@ -255,6 +258,26 @@ export function IconFacebook({ className }: Readonly<{ className?: string }>) {
       <path
         d="M13.8 8.2h1.4V6h-1.7c-1.6 0-2.6 1-2.6 2.6v1.3H9.5v2.2h1.4V19h2.3v-6.9h1.6l.3-2.2h-1.9V8.8c0-.4.2-.6.6-.6Z"
         fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+/** Folha decorativa — usada no rail de progresso ("cuidado que acompanha"). */
+export function IconLeaf({ className }: Readonly<{ className?: string }>) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <path
+        d="M4 20c8-1 14-6 15.5-15.5C10 6 4.5 12 4 20Z"
+        fill="currentColor"
+      />
+      <path
+        d="M6 18c4-3 8-7 11-13"
+        stroke="var(--color-background)"
+        strokeWidth="1.1"
+        strokeLinecap="round"
+        opacity={0.6}
+        fill="none"
       />
     </svg>
   )

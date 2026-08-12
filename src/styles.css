@@ -123,7 +123,6 @@
   --radius-md: calc(var(--radius) - 0.5rem);
 
   --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
-  --font-script: 'Parisienne', cursive;
   --font-sans: 'Karla', ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -164,5 +163,109 @@
     outline: 2px solid var(--color-ring);
     outline-offset: 2px;
     border-radius: var(--radius-md);
+  }
+}
+
+/* ── Movimento ────────────────────────────────────────────────────── */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blob-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0);
+  }
+}
+
+@keyframes leaf-bloom {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-32deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(-12deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-blob-float {
+    animation: blob-float 11s ease-in-out infinite;
+  }
+
+  .animate-leaf-bloom {
+    animation: leaf-bloom 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  .animate-pulse-ring {
+    animation: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Efeito de brilho ao passar o mouse — usado nos CTAs principais */
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .btn-shine::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      115deg,
+      transparent 35%,
+      oklch(100% 0 0 / 32%) 50%,
+      transparent 65%
+    );
+    transform: translateX(-130%);
+    transition: transform 0.65s ease;
+  }
+
+  @media (hover: hover) {
+    .btn-shine:hover::after {
+      transform: translateX(130%);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-blob-float,
+  .animate-leaf-bloom,
+  .animate-pulse-ring {
+    animation: none !important;
+  }
+
+  .btn-shine::after {
+    display: none;
   }
 }
