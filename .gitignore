@@ -10,3 +10,7 @@ dist
 
 # Gerado automaticamente pelo TanStack Router — não editar/versionar
 src/routeTree.gen.ts
+
+# Fotos originais em alta resolução (HEIC/JPG brutos) — as versões
+# otimizadas usadas no site ficam em public/images.
+iMG/

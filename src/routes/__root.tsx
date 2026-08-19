@@ -12,39 +12,32 @@ export const Route = createRootRoute({
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
-        title: 'Dr. Lorenzo Noronha | Odontologia em Santo Ângelo e São Miguel das Missões',
+        title:
+          'Dr. Lorenzo Noronha | Implantodontia em Santo Ângelo e São Miguel das Missões',
       },
       {
         name: 'description',
         content:
-          'Odontologia com calma, cuidado e confiança. Dr. Lorenzo Noronha atende em Santo Ângelo e São Miguel das Missões — implante, sisos, protocolo, prótese total e clínica geral. Agende sua avaliação online ou presencial.',
+          'Segurança para sorrir, resultados feitos para durar. Dr. Lorenzo Noronha, CRO/RS 29.781, é especialista em Implantodontia e Reabilitação Oral em Santo Ângelo e São Miguel das Missões — implantes, sisos, prótese protocolo, prótese total e odontologia integrada.',
       },
       {
         name: 'keywords',
         content:
-          'dentista Santo Ângelo, dentista São Miguel das Missões, implante dentário, cirurgia de sisos, protocolo dentário, prótese total, clínica geral odontológica',
+          'implantodontista Santo Ângelo, dentista São Miguel das Missões, implante dentário, prótese protocolo, prótese total, extração de siso, reabilitação oral',
       },
       { property: 'og:type', content: 'website' },
       {
         property: 'og:title',
-        content: 'Dr. Lorenzo Noronha | Odontologia com calma, cuidado e confiança',
+        content: 'Dr. Lorenzo Noronha | Segurança para sorrir, resultados feitos para durar',
       },
       {
         property: 'og:description',
         content:
-          'Avaliação online ou presencial em Santo Ângelo e São Miguel das Missões. Escuta antes de tratar, no tempo do paciente.',
+          'Especialista em Implantodontia (CRO/RS 29.781). Planejamento individualizado, tecnologia e técnicas modernas em Santo Ângelo e São Miguel das Missões.',
       },
       { property: 'og:locale', content: 'pt_BR' },
-      {
-        name: 'theme-color',
-        content: '#f7f2e6',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        name: 'theme-color',
-        content: '#1c2a1a',
-        media: '(prefers-color-scheme: dark)',
-      },
+      // Fundo do site é sempre branco (não segue o dark mode do sistema).
+      { name: 'theme-color', content: '#ffffff' },
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
@@ -55,8 +48,10 @@ export const Route = createRootRoute({
         crossOrigin: 'anonymous',
       },
       {
+        // Playfair Display (só itálico, para os títulos) + Inter (fallback
+        // real de 'Creato Display' — fonte comercial, ver styles.css).
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600;700&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600;1,700;1,800&family=Inter:wght@400;500;600;700;800&display=swap',
       },
       { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
     ],

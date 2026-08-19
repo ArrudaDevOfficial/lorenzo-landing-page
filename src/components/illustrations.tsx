@@ -1,112 +1,23 @@
 /**
- * Ilustrações originais em SVG, estilo aquarela suave, na paleta sálvia/areia.
- * Placeholders até que fotos reais do Dr. Lorenzo e imagens de serviço sejam
- * fornecidas — basta trocar os componentes usados em `src/routes/index.tsx`.
+ * Ícones originais em SVG — traço neutro (preto/cinza) para o desenho
+ * base do dente, com a cor de destaque (#376c76) reservada só para o
+ * detalhe (parafuso, coração, linha de extração), como pede a paleta
+ * "preto e branco + um único acento".
  */
 
-function Blob({
-  d,
-  fill,
-  opacity = 1,
-}: Readonly<{ d: string; fill: string; opacity?: number }>) {
-  return <path d={d} fill={fill} opacity={opacity} />
-}
-
-/** Retrato ilustrado para o hero — silhueta acolhedora, sem rosto real. */
-export function HeroPortrait({ className }: Readonly<{ className?: string }>) {
-  return (
-    <svg
-      viewBox="0 0 480 560"
-      className={className}
-      role="img"
-      aria-label="Ilustração do Dr. Lorenzo Noronha em tons de verde-sálvia"
-    >
-      <defs>
-        <linearGradient id="heroBg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#eadfc9" />
-          <stop offset="100%" stopColor="#d9e2cf" />
-        </linearGradient>
-        <linearGradient id="heroCoat" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#7c9070" />
-          <stop offset="100%" stopColor="#586f4d" />
-        </linearGradient>
-      </defs>
-
-      <rect width="480" height="560" rx="32" fill="url(#heroBg)" />
-
-      <Blob
-        d="M40 480 C 40 380, 120 340, 240 340 C 360 340, 440 380, 440 480 L 440 560 L 40 560 Z"
-        fill="#f4ede0"
-        opacity={0.6}
-      />
-
-      {/* ombros / jaleco */}
-      <path
-        d="M120 470 C120 380 170 330 240 330 C310 330 360 380 360 470 L360 520 L120 520 Z"
-        fill="url(#heroCoat)"
-      />
-      <path
-        d="M240 330 L240 460 M200 345 L240 400 L280 345"
-        stroke="#f4ede0"
-        strokeWidth="6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-        opacity={0.85}
-      />
-
-      {/* pescoço */}
-      <rect x="215" y="270" width="50" height="70" rx="20" fill="#e3b98f" />
-
-      {/* cabeça */}
-      <ellipse cx="240" cy="220" rx="78" ry="86" fill="#eec49a" />
-
-      {/* cabelo curto */}
-      <path
-        d="M162 210 C158 140 200 108 240 108 C284 108 322 140 318 214 C310 190 292 170 240 170 C190 170 172 190 162 210 Z"
-        fill="#4b3a2f"
-      />
-
-      {/* sorriso sutil + leve indicação de expressão calma */}
-      <path
-        d="M206 246 Q240 268 274 246"
-        stroke="#8a5a3a"
-        strokeWidth="5"
-        strokeLinecap="round"
-        fill="none"
-        opacity={0.6}
-      />
-      <circle cx="205" cy="222" r="6" fill="#4b3a2f" opacity={0.75} />
-      <circle cx="275" cy="222" r="6" fill="#4b3a2f" opacity={0.75} />
-
-      {/* folhas decorativas — toque orgânico */}
-      <g opacity={0.8}>
-        <path
-          d="M60 90 C90 60 130 60 150 90 C130 100 90 100 60 90 Z"
-          fill="#7c9070"
-        />
-        <path
-          d="M400 470 C430 440 440 400 420 370 C400 400 390 440 400 470 Z"
-          fill="#a9b98f"
-        />
-      </g>
-    </svg>
-  )
-}
-
-const iconStroke = '#3f5a3a'
-/** Tom de destaque (parafuso, coração, linha de extração) — sálvia mais
- * saturada, para casar com o verde da marca em vez de um marrom avulso. */
-const iconAccent = '#6b8257'
+const iconStroke = '#1a1a1a'
+/** Tom de destaque (parafuso, coração, linha de extração) — único acento
+ * da marca, usado com parcimônia. */
+const iconAccent = '#376c76'
 
 /** Implante — dente com parafuso de implante */
 export function IconImplante({ className }: Readonly<{ className?: string }>) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
-      <circle cx="60" cy="60" r="54" fill="#dfe6d2" />
+      <circle cx="60" cy="60" r="54" fill="#eaf2f2" />
       <path
         d="M60 30 C40 30 34 44 38 58 C40 66 36 72 38 82 C40 90 48 92 52 84 C54 80 58 80 60 84 C64 92 74 90 76 80 C78 70 76 64 78 58 C82 44 80 30 60 30 Z"
-        fill="#f7f2e6"
+        fill="#ffffff"
         stroke={iconStroke}
         strokeWidth="2.5"
       />
@@ -118,7 +29,7 @@ export function IconImplante({ className }: Readonly<{ className?: string }>) {
       />
       <path
         d="M54 90 L66 90 M53 96 L67 96 M54 102 L66 102"
-        stroke="#f7f2e6"
+        stroke="#ffffff"
         strokeWidth="2"
       />
     </svg>
@@ -129,10 +40,10 @@ export function IconImplante({ className }: Readonly<{ className?: string }>) {
 export function IconSisos({ className }: Readonly<{ className?: string }>) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
-      <circle cx="60" cy="60" r="54" fill="#e7ddc4" />
+      <circle cx="60" cy="60" r="54" fill="#d9e8e9" />
       <path
         d="M42 36 C34 36 30 46 32 56 C33 62 30 66 31 74 C32 82 40 84 44 76 C46 72 50 72 52 76 C56 84 64 84 66 76 C68 72 72 72 74 76 C78 84 86 82 87 74 C88 66 85 62 86 56 C88 46 84 36 76 36 C68 40 58 42 60 42 C60 42 50 40 42 36 Z"
-        fill="#f7f2e6"
+        fill="#ffffff"
         stroke={iconStroke}
         strokeWidth="2.5"
       />
@@ -151,7 +62,7 @@ export function IconSisos({ className }: Readonly<{ className?: string }>) {
 export function IconProtocolo({ className }: Readonly<{ className?: string }>) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
-      <circle cx="60" cy="60" r="54" fill="#dfe6d2" />
+      <circle cx="60" cy="60" r="54" fill="#eaf2f2" />
       <path
         d="M30 66 Q60 40 90 66"
         stroke={iconStroke}
@@ -166,7 +77,7 @@ export function IconProtocolo({ className }: Readonly<{ className?: string }>) {
           width="10"
           height="22"
           rx="4"
-          fill="#f7f2e6"
+          fill="#ffffff"
           stroke={iconStroke}
           strokeWidth="2"
         />
@@ -185,7 +96,7 @@ export function IconProtocolo({ className }: Readonly<{ className?: string }>) {
 export function IconProtese({ className }: Readonly<{ className?: string }>) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
-      <circle cx="60" cy="60" r="54" fill="#e7ddc4" />
+      <circle cx="60" cy="60" r="54" fill="#d9e8e9" />
       <path
         d="M28 52 C28 74 42 88 60 88 C78 88 92 74 92 52"
         fill="none"
@@ -194,7 +105,7 @@ export function IconProtese({ className }: Readonly<{ className?: string }>) {
       />
       <path
         d="M30 50 C30 70 44 82 60 82 C76 82 90 70 90 50 C90 46 86 44 82 46 C78 48 76 52 72 50 C68 48 66 44 62 46 C58 48 58 52 54 50 C50 48 50 44 46 46 C42 48 40 52 36 50 C32 48 30 46 30 50 Z"
-        fill="#f7f2e6"
+        fill="#ffffff"
         stroke={iconStroke}
         strokeWidth="2"
       />
@@ -202,16 +113,16 @@ export function IconProtese({ className }: Readonly<{ className?: string }>) {
   )
 }
 
-/** Clínica geral — dente com coração, cuidado contínuo */
-export function IconClinicaGeral({
+/** Odontologia integrada — dente com coração, cuidado contínuo em equipe */
+export function IconIntegrada({
   className,
 }: Readonly<{ className?: string }>) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
-      <circle cx="60" cy="60" r="54" fill="#dfe6d2" />
+      <circle cx="60" cy="60" r="54" fill="#eaf2f2" />
       <path
         d="M60 32 C42 32 36 46 39 58 C41 68 37 74 39 84 C41 92 49 93 52 85 C54 80 58 80 60 85 C63 93 71 92 73 84 C75 74 71 68 73 58 C76 46 78 32 60 32 Z"
-        fill="#f7f2e6"
+        fill="#ffffff"
         stroke={iconStroke}
         strokeWidth="2.5"
       />
@@ -258,26 +169,6 @@ export function IconFacebook({ className }: Readonly<{ className?: string }>) {
       <path
         d="M13.8 8.2h1.4V6h-1.7c-1.6 0-2.6 1-2.6 2.6v1.3H9.5v2.2h1.4V19h2.3v-6.9h1.6l.3-2.2h-1.9V8.8c0-.4.2-.6.6-.6Z"
         fill="currentColor"
-      />
-    </svg>
-  )
-}
-
-/** Folha decorativa — usada no rail de progresso ("cuidado que acompanha"). */
-export function IconLeaf({ className }: Readonly<{ className?: string }>) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <path
-        d="M4 20c8-1 14-6 15.5-15.5C10 6 4.5 12 4 20Z"
-        fill="currentColor"
-      />
-      <path
-        d="M6 18c4-3 8-7 11-13"
-        stroke="var(--color-background)"
-        strokeWidth="1.1"
-        strokeLinecap="round"
-        opacity={0.6}
-        fill="none"
       />
     </svg>
   )
