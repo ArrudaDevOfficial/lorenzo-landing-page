@@ -1,6 +1,7 @@
 import { useState, type ComponentType } from 'react'
-import { ChevronDown, Image as ImageIcon } from 'lucide-react'
+import { ChevronDown, Image as ImageIcon, Maximize2 } from 'lucide-react'
 import { Reveal } from '~/components/Reveal'
+import { Lightbox } from '~/components/Lightbox'
 
 export type Service = {
   icon: ComponentType<{ className?: string }>
@@ -17,6 +18,7 @@ export type Service = {
  */
 export function ServicesAccordion({ services }: Readonly<{ services: Service[] }>) {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null)
 
   return (
     <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
@@ -34,13 +36,13 @@ export function ServicesAccordion({ services }: Readonly<{ services: Service[] }
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : i)}
-                className="group flex w-full items-center gap-5 px-6 py-6 text-left transition-colors hover:bg-sage/5 sm:gap-6 sm:px-8 sm:py-7"
+                className="group flex w-full items-center gap-5 px-6 py-6 text-left transition-colors hover:bg-brand/5 sm:gap-6 sm:px-8 sm:py-7"
               >
                 <span
                   className={`flex size-14 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
                     isOpen
-                      ? 'bg-sage-deep text-primary-foreground'
-                      : 'bg-sage/15 text-sage-deep group-hover:bg-sage/25'
+                      ? 'bg-brand-deep text-primary-foreground'
+                      : 'bg-brand/15 text-brand-deep group-hover:bg-brand/25'
                   }`}
                 >
                   <service.icon className="size-7" />
@@ -51,7 +53,7 @@ export function ServicesAccordion({ services }: Readonly<{ services: Service[] }
                 <ChevronDown
                   aria-hidden="true"
                   className={`size-5 shrink-0 text-muted-foreground transition-transform duration-300 ${
-                    isOpen ? 'rotate-180 text-sage-deep' : ''
+                    isOpen ? 'rotate-180 text-brand-deep' : ''
                   }`}
                 />
               </button>
@@ -70,39 +72,63 @@ export function ServicesAccordion({ services }: Readonly<{ services: Service[] }
                   <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
                     {service.text}
                   </p>
-                  <ServiceThumb service={service} />
+                  <ServiceThumb
+                    service={service}
+                    onOpen={(src, alt) => setLightbox({ src, alt })}
+                  />
                 </div>
               </div>
             </div>
           </Reveal>
         )
       })}
+
+      {lightbox && (
+        <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />
+      )}
     </div>
   )
 }
 
-/** Degradê que funde a borda esquerda da foto com o fundo do card —
- * mesma sensação da referência, sem recorte reto. Só faz sentido com uma
- * foto real por trás; o placeholder de ícone fica com borda normal. */
-const PHOTO_FADE = 'linear-gradient(to left, black 58%, transparent 100%)'
+/** Degradê que funde a borda esquerda da foto com o fundo do card — só se
+ * aplica no layout lado a lado (sm+); no mobile a foto fica de largura
+ * cheia, sem fundir bordas. */
+const PHOTO_FADE =
+  'sm:[mask-image:linear-gradient(to_left,black_58%,transparent_100%)] sm:[-webkit-mask-image:linear-gradient(to_left,black_58%,transparent_100%)]'
 
-function ServiceThumb({ service }: Readonly<{ service: Service }>) {
+function ServiceThumb({
+  service,
+  onOpen,
+}: Readonly<{ service: Service; onOpen: (src: string, alt: string) => void }>) {
   if (service.image) {
+    const alt = `Foto ilustrativa do procedimento de ${service.title}`
     return (
-      <img
-        src={service.image}
-        alt={`Foto ilustrativa do procedimento de ${service.title}`}
-        width={192}
-        height={240}
-        loading="lazy"
-        className="hidden aspect-[4/5] w-40 shrink-0 rounded-[1.75rem] object-cover sm:block md:w-48"
-        style={{ maskImage: PHOTO_FADE, WebkitMaskImage: PHOTO_FADE }}
-      />
+      <button
+        type="button"
+        onClick={() => onOpen(service.image!, alt)}
+        aria-label={`Ampliar foto de ${service.title}`}
+        className="group/thumb relative block w-full overflow-hidden rounded-[1.75rem] text-left sm:w-40 sm:shrink-0 md:w-48"
+      >
+        <img
+          src={service.image}
+          alt={alt}
+          width={192}
+          height={240}
+          loading="lazy"
+          className={`aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover/thumb:scale-105 sm:aspect-[4/5] ${PHOTO_FADE}`}
+        />
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover/thumb:bg-black/15"
+        >
+          <Maximize2 className="size-5 text-white opacity-0 drop-shadow transition-opacity duration-300 group-hover/thumb:opacity-100" />
+        </span>
+      </button>
     )
   }
 
   return (
-    <div className="hidden aspect-[4/5] w-40 shrink-0 flex-col items-center justify-center gap-2 rounded-[1.75rem] border-2 border-dashed border-sage/25 bg-gradient-to-br from-sage/15 via-card to-sand/30 sm:flex md:w-48">
+    <div className="flex aspect-[16/10] w-full flex-col items-center justify-center gap-2 rounded-[1.75rem] border-2 border-dashed border-brand/25 bg-gradient-to-br from-brand/15 via-card to-mist/30 sm:aspect-[4/5] sm:w-40 sm:shrink-0 md:w-48">
       <service.icon className="size-12 opacity-70" />
       <span className="inline-flex items-center gap-1 text-[10px] font-medium tracking-wide text-muted-foreground uppercase">
         <ImageIcon className="size-3" aria-hidden="true" />

@@ -1,18 +1,18 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Calendar, MapPin, Clock, ArrowRight, Menu, X } from 'lucide-react'
-import { useEffect, useState, type CSSProperties, type PointerEvent, type ReactNode } from 'react'
+import { Calendar, MapPin, ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react'
+import { useEffect, useState, type PointerEvent } from 'react'
 import { useActiveSection } from '~/hooks/useActiveSection'
 import { Reveal } from '~/components/Reveal'
 import { GrowthRail, SECTION_IDS } from '~/components/GrowthRail'
 import { FloatingWhatsapp } from '~/components/FloatingWhatsapp'
+import { ToothShowcase } from '~/components/ToothShowcase'
 import { ServicesAccordion, type Service } from '~/components/ServicesAccordion'
 import {
-  HeroPortrait,
   IconImplante,
   IconSisos,
   IconProtocolo,
   IconProtese,
-  IconClinicaGeral,
+  IconIntegrada,
   IconWhatsapp,
   IconInstagram,
   IconFacebook,
@@ -23,6 +23,8 @@ export const Route = createFileRoute('/')({
   component: Home,
 })
 
+const CRO = 'CRO/RS 29.781'
+
 // TODO: substituir pelo número real em formato internacional (ex: 5555988887777)
 const WHATSAPP_NUMBER = '5555999999999'
 const WHATSAPP_MESSAGE = encodeURIComponent(
@@ -32,47 +34,53 @@ const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}
 
 const SERVICES: Service[] = [
   {
-    icon: IconImplante,
-    title: 'Implante',
-    text: 'Reposição de dentes ausentes com planejamento cuidadoso, do exame ao acompanhamento pós-cirúrgico.',
+    icon: IconSisos,
+    title: 'Extração de Sisos',
+    text: 'Os dentes do siso nem sempre possuem espaço suficiente para nascer corretamente, podendo causar dor, inflamações, infecções e alterações na posição dos demais dentes. A extração é indicada quando há risco à saúde bucal ou desconforto, sendo realizada com planejamento cuidadoso, técnicas modernas e foco na segurança e no conforto durante a recuperação.',
+    image: '/images/servico-sisos.webp',
   },
   {
-    icon: IconSisos,
-    title: 'Sisos',
-    text: 'Avaliação e extração de terceiros molares com conforto, explicando cada etapa antes de começar.',
+    icon: IconImplante,
+    title: 'Implantes Dentários',
+    text: 'Os implantes dentários são a solução para substituir um ou mais dentes perdidos com segurança, estabilidade e naturalidade. Seja para um implante unitário ou para a reabilitação de múltiplos dentes, cada tratamento é planejado de forma individualizada para restaurar a função mastigatória, a estética e a confiança ao sorrir.',
+    image: '/images/servico-implante.webp',
   },
   {
     icon: IconProtocolo,
-    title: 'Protocolo',
-    text: 'Prótese fixa sobre implantes para devolver função e naturalidade ao sorriso, com estabilidade no dia a dia.',
+    title: 'Prótese Protocolo',
+    text: 'Indicada para pacientes que perderam todos os dentes de uma arcada ou possuem dentes com comprometimento irreversível, a prótese protocolo é fixada sobre implantes, proporcionando muito mais estabilidade do que as próteses removíveis convencionais. O tratamento devolve segurança para mastigar, falar e sorrir, com excelente estética e conforto.',
+    image: '/images/servico-protocolo.webp',
   },
   {
     icon: IconProtese,
     title: 'Prótese Total',
-    text: 'Reabilitação completa pensada no seu conforto ao falar, mastigar e sorrir com segurança.',
+    text: 'A prótese total é uma alternativa para reabilitar pacientes que perderam todos os dentes de uma ou de ambas as arcadas. Confeccionada de forma personalizada, busca restabelecer a mastigação, a fala e a harmonia facial, proporcionando melhor adaptação, conforto e qualidade de vida.',
+    image: '/images/servico-protese-total.webp',
   },
   {
-    icon: IconClinicaGeral,
-    title: 'Clínica Geral',
-    text: 'Prevenção, restaurações e cuidado contínuo — a base de uma saúde bucal tranquila e duradoura.',
+    icon: IconIntegrada,
+    title: 'Odontologia Integrada',
+    text: 'Além da implantodontia, oferecemos um atendimento completo por meio de uma equipe de especialistas. Realizamos tratamentos como endodontia (tratamento de canal), ortodontia, odontologia estética e clínica geral, garantindo que todas as etapas do seu tratamento sejam conduzidas de forma integrada, com planejamento e acompanhamento em um único lugar.',
+    image: '/images/servico-integrada.webp',
   },
 ]
 
 const UNITS = [
   {
     city: 'Santo Ângelo',
-    address: 'Rua Antônio Manoel, 1200 — Centro, Santo Ângelo/RS',
-    hours: 'Segunda a sexta, 8h às 18h',
+    address: 'R. Vinte e Cinco de Julho, 350 — Centro, Santo Ângelo/RS, 98801-670',
+    detail: '2º andar, ao lado do Restaurante do Chico',
   },
   {
     city: 'São Miguel das Missões',
-    address: 'Av. das Missões, 350 — Centro, São Miguel das Missões/RS',
-    hours: 'Terças e quintas, 8h às 17h',
+    address: 'Rua Santo Ângelo, 1113 — São Miguel das Missões/RS',
+    detail: 'Consultório Dra. Mariely Bedates, próximo à Prefeitura',
   },
 ] as const
 
 const NAV_LINKS = [
   { href: '#servicos', label: 'Serviços' },
+  { href: '#tecnologia', label: 'Tecnologia' },
   { href: '#sobre', label: 'Sobre' },
   { href: '#localizacao', label: 'Localização' },
 ] as const
@@ -91,36 +99,34 @@ function Home() {
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 [background:radial-gradient(600px_circle_at_var(--spot-x,50%)_var(--spot-y,50%),oklch(68%_0.06_150/16%),transparent_70%)]"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-32 -right-40 size-[32rem] rounded-full bg-sage/20 blur-3xl motion-safe:animate-blob-float"
-        />
-        <div
-          aria-hidden="true"
-          style={{ animationDelay: '-5.5s' }}
-          className="pointer-events-none absolute -bottom-24 -left-24 size-96 rounded-full bg-sand-warm/30 blur-3xl motion-safe:animate-blob-float"
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 [background:radial-gradient(600px_circle_at_var(--spot-x,50%)_var(--spot-y,50%),rgba(55,108,118,0.12),transparent_70%)]"
         />
 
-        <div className="relative mx-auto grid max-w-6xl gap-10 px-6 py-16 sm:px-8 md:grid-cols-2 md:items-center md:py-24 lg:py-28">
+        <div className="relative mx-auto grid max-w-6xl gap-8 px-6 py-16 sm:px-8 md:grid-cols-[1fr_1.1fr] md:items-center md:gap-6 md:py-20 lg:gap-10 lg:py-24">
           <div className="order-2 md:order-1">
-            <Eyebrow className="animate-fade-up">Cuidado que acompanha</Eyebrow>
+            <div
+              style={{ animationDelay: '0ms' }}
+              className="animate-fade-up inline-flex flex-wrap items-center gap-2 rounded-full border border-brand/35 bg-card/80 px-4 py-1.5 text-xs font-semibold tracking-wide text-brand-deep backdrop-blur"
+            >
+              <span className="tabular-nums">{CRO}</span>
+              <span aria-hidden="true" className="size-1 rounded-full bg-brand-deep/50" />
+              Especialista em Implantodontia
+            </div>
+
             <h1
               style={{ animationDelay: '90ms' }}
-              className="text-balance animate-fade-up mt-2 font-serif text-4xl leading-[1.1] font-medium tracking-tight text-foreground italic md:text-6xl"
+              className="text-balance animate-fade-up mt-5 font-serif text-4xl leading-[1.08] font-medium tracking-tight text-foreground italic md:text-6xl"
             >
-              Odontologia com calma, cuidado e confiança
+              Segurança para sorrir, resultados feitos para durar.
             </h1>
             <p
               style={{ animationDelay: '180ms' }}
               className="animate-fade-up mt-6 max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg"
             >
-              Sou o Dr. Lorenzo Noronha, cirurgião-dentista em{' '}
-              <strong className="font-semibold text-foreground">Santo Ângelo</strong> e{' '}
-              <strong className="font-semibold text-foreground">São Miguel das Missões</strong>.
-              Aqui, todo tratamento começa com escuta — a explicação acontece
-              no seu tempo, antes de qualquer decisão.
+              Acredito que devolver um sorriso vai muito além da estética. É
+              devolver <strong className="font-semibold text-foreground">segurança para falar</strong>,{' '}
+              <strong className="font-semibold text-foreground">liberdade para sorrir</strong> e qualidade
+              de vida para viver cada momento com confiança.
             </p>
             <div
               style={{ animationDelay: '270ms' }}
@@ -137,7 +143,7 @@ function Home() {
               </a>
               <a
                 href="#servicos"
-                className="group/cta inline-flex items-center gap-1.5 rounded-xl px-4 py-3.5 font-medium text-sage-deep underline-offset-4 hover:underline"
+                className="group/cta inline-flex items-center gap-1.5 rounded-xl px-4 py-3.5 font-medium text-brand-deep underline-offset-4 hover:underline"
               >
                 Conhecer os atendimentos
                 <ArrowRight className="size-4 transition-transform group-hover/cta:translate-x-0.5" aria-hidden="true" />
@@ -148,10 +154,10 @@ function Home() {
               style={{ animationDelay: '360ms' }}
               className="animate-fade-up mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6 text-sm text-muted-foreground"
             >
-              {['Escuta ativa', 'Avaliação sem pressa', 'Duas unidades na região'].map(
+              {['Planejamento individualizado', 'Tecnologia e técnica moderna', 'Atendimento exclusivo e humanizado'].map(
                 (item) => (
                   <li key={item} className="flex items-center gap-2">
-                    <span className="size-1.5 shrink-0 rounded-full bg-sage" aria-hidden="true" />
+                    <span className="size-1.5 shrink-0 rounded-full bg-brand" aria-hidden="true" />
                     {item}
                   </li>
                 ),
@@ -161,9 +167,15 @@ function Home() {
 
           <div
             style={{ animationDelay: '140ms' }}
-            className="animate-fade-up order-1 md:order-2"
+            className="animate-fade-up order-1 flex justify-center md:order-2"
           >
-            <HeroPortrait className="mx-auto w-full max-w-sm drop-shadow-xl md:max-w-md" />
+            <div className="relative mx-auto flex w-full max-w-md items-center justify-center md:max-w-lg lg:max-w-xl">
+              <img
+                src="/images/hero-lorenzo.webp"
+                alt="Dr. Lorenzo Noronha, cirurgião-dentista especialista em Implantodontia"
+                className="relative w-[94%] [filter:drop-shadow(0_20px_16px_rgba(20,20,20,0.14))_drop-shadow(0_40px_45px_rgba(20,20,20,0.16))]"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -172,7 +184,7 @@ function Home() {
       <section id="servicos" className="mx-auto max-w-4xl px-6 py-16 sm:px-8 md:py-24">
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance font-serif text-3xl font-medium tracking-tight italic md:text-4xl">
-            Cuidado em cada etapa do seu sorriso
+            Soluções completas para recuperar sua saúde bucal
           </h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
             Toque em um atendimento para ver como funciona.
@@ -184,41 +196,74 @@ function Home() {
         </div>
       </section>
 
+      {/* TECNOLOGIA — vitrine em tela cheia com efeito de scroll */}
+      <ToothShowcase />
+
       {/* SOBRE MIM */}
       <section id="sobre" className="border-t border-border bg-card">
-        <div className="mx-auto max-w-4xl px-6 py-16 text-center sm:px-8 md:py-24">
-          <Reveal>
-            <Eyebrow>Sobre mim</Eyebrow>
-            <h2 className="text-balance mt-2 font-serif text-3xl font-medium tracking-tight italic md:text-4xl">
-              Escuto antes de tratar
-            </h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Ao longo da minha trajetória em odontologia, aprendi que um bom
-              tratamento começa muito antes da cadeira: começa na conversa. Cada
-              pessoa chega com uma história diferente com o dentista, e é essa
-              história que eu ouço primeiro. Explico cada etapa no tempo de
-              quem está sendo atendido, sem pressa, para que a decisão sobre o
-              próprio sorriso seja sempre tranquila e informada. A avaliação
-              pode ser feita online ou presencialmente, em Santo Ângelo ou em
-              São Miguel das Missões — o primeiro passo é sempre simples.
-            </p>
-          </Reveal>
+        <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8 md:py-24">
+          <div className="grid gap-10 md:grid-cols-[minmax(0,22rem)_1fr] md:items-start md:gap-14">
+            <Reveal className="mx-auto w-full max-w-xs md:mx-0 md:sticky md:top-28">
+              <img
+                src="/images/sobre-lorenzo-bw.webp"
+                alt="Dr. Lorenzo Noronha, cirurgião-dentista"
+                className="aspect-[4/5] w-full rounded-2xl object-cover shadow-lg"
+              />
+              <p className="mt-4 text-center text-sm text-muted-foreground md:text-left">
+                <span className="font-semibold text-foreground">Dr. Lorenzo Noronha</span>
+                <br />
+                <span className="tabular-nums">{CRO}</span>
+              </p>
+            </Reveal>
+
+            <div>
+              <Reveal>
+                <h2 className="text-balance font-serif text-3xl font-medium tracking-tight italic md:text-4xl">
+                  Mais do que reabilitar sorrisos, meu compromisso é oferecer segurança e previsibilidade
+                </h2>
+              </Reveal>
+
+              <Reveal delay={100}>
+                <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                  Sou Dr. Lorenzo Noronha, cirurgião-dentista com atuação dedicada à{' '}
+                  <strong className="font-semibold text-foreground">Implantodontia</strong> e à{' '}
+                  <strong className="font-semibold text-foreground">Reabilitação Oral</strong>. Acredito que
+                  um tratamento de excelência começa muito antes do procedimento: nasce de um diagnóstico
+                  preciso, de um planejamento individualizado e de uma relação baseada na confiança e na
+                  transparência.
+                </p>
+              </Reveal>
+              <Reveal delay={180}>
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                  Cada paciente possui uma história, necessidades e expectativas diferentes. Por isso, cada
+                  caso é conduzido de forma personalizada, respeitando critérios técnicos e utilizando
+                  recursos que proporcionam maior previsibilidade, conforto e longevidade aos resultados.
+                </p>
+              </Reveal>
+              <Reveal delay={260}>
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                  Atendendo em <strong className="font-semibold text-foreground">Santo Ângelo</strong> e{' '}
+                  <strong className="font-semibold text-foreground">São Miguel das Missões</strong>, meu
+                  propósito é devolver não apenas a função mastigatória e a estética do sorriso, mas também
+                  a tranquilidade de saber que cada etapa do tratamento foi planejada com responsabilidade,
+                  precisão e dedicação.
+                </p>
+              </Reveal>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* AGENDAMENTO + REDES */}
-      <section id="agendar" className="border-t border-border bg-sand/40">
+      <section id="agendar" className="border-t border-border">
         <div className="mx-auto max-w-4xl px-6 py-16 text-center sm:px-8 md:py-24">
           <Reveal>
-            <Eyebrow>Contato</Eyebrow>
-            <h2 className="text-balance mt-2 font-serif text-3xl font-medium tracking-tight italic md:text-4xl">
-              Vamos cuidar do seu sorriso, no seu tempo.
+            <h2 className="text-balance font-serif text-3xl font-medium tracking-tight italic md:text-4xl">
+              Vamos cuidar do seu sorriso, com segurança.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
-              Marque uma avaliação online ou presencial em Santo Ângelo ou São
-              Miguel das Missões.
+              Marque uma avaliação em Santo Ângelo ou São Miguel das Missões e conheça o
+              plano de tratamento ideal para o seu caso.
             </p>
 
             <a
@@ -238,7 +283,7 @@ function Home() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Conversar no WhatsApp"
-              className="flex size-11 items-center justify-center rounded-full border border-border text-sage-deep transition-colors hover:bg-sage/10"
+              className="flex size-11 items-center justify-center rounded-full border border-border text-brand-deep transition-colors hover:bg-brand/10"
             >
               <IconWhatsapp className="size-5" />
             </a>
@@ -247,7 +292,7 @@ function Home() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Seguir no Instagram"
-              className="flex size-11 items-center justify-center rounded-full border border-border text-sage-deep transition-colors hover:bg-sage/10"
+              className="flex size-11 items-center justify-center rounded-full border border-border text-brand-deep transition-colors hover:bg-brand/10"
             >
               <IconInstagram className="size-5" />
             </a>
@@ -256,7 +301,7 @@ function Home() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Seguir no Facebook"
-              className="flex size-11 items-center justify-center rounded-full border border-border text-sage-deep transition-colors hover:bg-sage/10"
+              className="flex size-11 items-center justify-center rounded-full border border-border text-brand-deep transition-colors hover:bg-brand/10"
             >
               <IconFacebook className="size-5" />
             </a>
@@ -265,11 +310,10 @@ function Home() {
       </section>
 
       {/* LOCALIZAÇÃO */}
-      <section id="localizacao" className="bg-sand/40">
+      <section id="localizacao" className="border-t border-border">
         <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8 md:py-24">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <Eyebrow>Onde estou</Eyebrow>
-            <h2 className="text-balance mt-2 font-serif text-3xl font-medium tracking-tight italic md:text-4xl">
+            <h2 className="text-balance font-serif text-3xl font-medium tracking-tight italic md:text-4xl">
               Duas unidades para atender você
             </h2>
           </Reveal>
@@ -283,7 +327,7 @@ function Home() {
                 className="group rounded-2xl border border-border bg-card p-8 shadow-sm hover:shadow-lg"
               >
                 <div className="flex items-center gap-3">
-                  <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-sage/15 text-sage-deep transition-transform duration-300 group-hover:scale-110">
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand-deep transition-transform duration-300 group-hover:scale-110">
                     <IconPin className="size-5" />
                   </span>
                   <h3 className="font-serif text-2xl font-medium italic">
@@ -294,10 +338,18 @@ function Home() {
                   <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
                   <span className="min-w-0">{unit.address}</span>
                 </p>
-                <p className="mt-2 flex items-start gap-2.5 text-sm text-muted-foreground">
-                  <Clock className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-                  <span className="min-w-0">{unit.hours}</span>
+                <p className="mt-2 pl-[1.625rem] text-sm text-muted-foreground/80">
+                  {unit.detail}
                 </p>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${unit.address} ${unit.detail}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-brand-deep underline-offset-4 hover:underline"
+                >
+                  Ver no mapa
+                  <ArrowUpRight className="size-4" aria-hidden="true" />
+                </a>
               </Reveal>
             ))}
           </div>
@@ -307,22 +359,6 @@ function Home() {
       <SiteFooter />
       <FloatingWhatsapp href={WHATSAPP_LINK} />
     </main>
-  )
-}
-
-/** Rótulo minimalista (linhas retas, sem cursiva) usado como "assinatura" de cada seção. */
-function Eyebrow({
-  children,
-  className = '',
-  style,
-}: Readonly<{ children: ReactNode; className?: string; style?: CSSProperties }>) {
-  return (
-    <p
-      style={style}
-      className={`text-xs font-semibold tracking-[0.28em] text-sage-deep uppercase ${className}`}
-    >
-      {children}
-    </p>
   )
 }
 
@@ -368,8 +404,13 @@ function SiteHeader() {
           scrolled ? 'py-3' : 'py-4'
         }`}
       >
-        <a href="#topo" className="font-serif text-lg tracking-tight italic">
-          Lorenzo <span className="text-sage-deep">Noronha</span>
+        <a href="#topo" className="leading-tight">
+          <span className="font-serif text-lg font-medium tracking-tight italic">
+            Lorenzo <span className="text-brand-deep">Noronha</span>
+          </span>
+          <span className="hidden text-[11px] font-medium tracking-[0.16em] text-muted-foreground uppercase sm:block">
+            Implantodontia
+          </span>
         </a>
 
         <nav aria-label="Principal" className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
@@ -387,7 +428,7 @@ function SiteHeader() {
                 {link.label}
                 <span
                   aria-hidden="true"
-                  className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-sage-deep transition-transform duration-300 ${
+                  className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-brand-deep transition-transform duration-300 ${
                     isActive ? 'scale-x-100' : 'scale-x-0'
                   }`}
                 />
@@ -411,7 +452,7 @@ function SiteHeader() {
             aria-controls="menu-mobile"
             aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
             onClick={() => setMenuOpen((open) => !open)}
-            className="flex size-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-sage/10 md:hidden"
+            className="flex size-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-brand/10 md:hidden"
           >
             {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -434,7 +475,7 @@ function SiteHeader() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="rounded-lg px-2 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-sage/10 hover:text-foreground"
+                className="rounded-lg px-2 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-brand/10 hover:text-foreground"
               >
                 {link.label}
               </a>
@@ -461,11 +502,14 @@ function SiteFooter() {
     <footer className="border-t border-border">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 sm:px-8 md:grid-cols-3">
         <Reveal>
-          <p className="font-serif text-lg italic">
-            Lorenzo <span className="text-sage-deep">Noronha</span>
+          <p className="font-serif text-lg font-medium italic">
+            Lorenzo <span className="text-brand-deep">Noronha</span>
+          </p>
+          <p className="mt-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">
+            Implantodontia · <span className="tabular-nums normal-case">{CRO}</span>
           </p>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            Odontologia com calma, cuidado e confiança, em Santo Ângelo e São
+            Segurança para sorrir, resultados feitos para durar — em Santo Ângelo e São
             Miguel das Missões.
           </p>
         </Reveal>
@@ -495,7 +539,7 @@ function SiteFooter() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Conversar no WhatsApp"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-sage-deep transition-colors hover:bg-sage/10"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-brand-deep transition-colors hover:bg-brand/10"
             >
               <IconWhatsapp className="size-4" />
             </a>
@@ -504,7 +548,7 @@ function SiteFooter() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Seguir no Instagram"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-sage-deep transition-colors hover:bg-sage/10"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-brand-deep transition-colors hover:bg-brand/10"
             >
               <IconInstagram className="size-4" />
             </a>
@@ -513,7 +557,7 @@ function SiteFooter() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Seguir no Facebook"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-sage-deep transition-colors hover:bg-sage/10"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-brand-deep transition-colors hover:bg-brand/10"
             >
               <IconFacebook className="size-4" />
             </a>
@@ -522,7 +566,7 @@ function SiteFooter() {
       </div>
 
       <div className="border-t border-border py-6 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} Dr. Lorenzo Noronha — Odontologia. Santo
+        © {new Date().getFullYear()} Dr. Lorenzo Noronha — Implantodontia. Santo
         Ângelo &amp; São Miguel das Missões, RS.
       </div>
     </footer>
