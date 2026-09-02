@@ -276,7 +276,7 @@ function Home() {
                 </div>
                 <p className="mt-5 flex items-start gap-2.5 text-sm text-muted-foreground">
                   <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-                  <span className="min-w-0">{unit.address}</span>
+                  <span className="min-w-0 text-justify">{unit.address}</span>
                 </p>
                 <p className="mt-2 pl-[1.625rem] text-sm text-muted-foreground/80">
                   {unit.detail}

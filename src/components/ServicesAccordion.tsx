@@ -69,7 +69,7 @@ export function ServicesAccordion({ services }: Readonly<{ services: Service[] }
             >
               <div className="overflow-hidden">
                 <div className="grid gap-6 px-6 pb-8 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8 sm:px-8 sm:pl-[5.25rem]">
-                  <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
+                  <p className="max-w-xl text-justify text-base leading-relaxed text-muted-foreground">
                     {service.text}
                   </p>
                   <ServiceThumb
