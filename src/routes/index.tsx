@@ -102,9 +102,9 @@ function Home() {
           transição pro conteúdo seguinte é uma sombra suave (sem faixa de
           cor) — a foto "flutua" sobre a seção. */}
       <section id="topo" className="relative">
-        <div className="relative aspect-[4/3] w-full overflow-hidden shadow-[0_32px_40px_-28px_rgba(19,26,30,0.45)] lg:aspect-[2.1/1]">
+        <div className="relative aspect-[4/3] w-full overflow-hidden shadow-[0_32px_40px_-28px_rgba(19,26,30,0.45)] xl:aspect-[2.1/1]">
           <picture>
-            <source media="(min-width: 1024px)" srcSet="/images/hero-lorenzo.webp" />
+            <source media="(min-width: 1280px)" srcSet="/images/hero-lorenzo.webp" />
             <img
               src="/images/hero-lorenzo-mobile.webp"
               alt="Dr. Lorenzo Noronha, cirurgião-dentista especialista em Implantodontia, em estúdio"
@@ -342,9 +342,9 @@ function HeroCopy({ className = '' }: Readonly<{ className?: string }>) {
           href={WHATSAPP_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-shine inline-flex items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] motion-reduce:hover:scale-100 sm:gap-2 sm:rounded-xl sm:px-6 sm:py-3.5 sm:text-base"
+          className="btn-shine inline-flex items-center gap-1 rounded-md bg-primary px-2.5 py-1.5 text-xs font-medium text-primary-foreground shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] motion-reduce:hover:scale-100 sm:gap-2 sm:rounded-xl sm:px-6 sm:py-3.5 sm:text-base"
         >
-          <Calendar className="size-4 sm:size-5" aria-hidden="true" />
+          <Calendar className="size-3.5 sm:size-5" aria-hidden="true" />
           Agendar avaliação
         </a>
         <a
