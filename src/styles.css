@@ -1,37 +1,59 @@
 @import 'tailwindcss';
 
+@font-face {
+  font-family: 'Iwona Light';
+  src: url('/fonts/IwonaLight-Regular.woff2') format('woff2');
+  font-weight: 300 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Iwona Light';
+  src: url('/fonts/IwonaLight-Italic.woff2') format('woff2');
+  font-weight: 300 400;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
-  /* Fundo branco fixo — o site não muda de cor com o modo escuro do
-     sistema (era por isso que o branco "sumia" pra quem usa dark mode
-     no SO/navegador). O destaque #376c76 aparece mais generosamente nos
-     neutros (mist, bordas) em vez de ficar restrito só a botão/ícone. */
-  --background: #ffffff;
-  --foreground: #141414;
+  /* Nova identidade — paleta de 4 tons (hex exatos do cliente). O fundo
+     não muda de cor com o modo escuro do sistema, propositalmente: a
+     marca é sempre clara (branco), com o preto/azul-escuro reservados
+     para texto e acentos. */
+  --branco: #f2f4f3;
+  --azul-claro: #9facb7;
+  --azul-escuro: #273751;
+  --preto: #131a1e;
 
-  --card: #ffffff;
-  --card-foreground: #141414;
+  --background: var(--branco);
+  --foreground: var(--preto);
 
-  /* Destaque — único tom de marca (hex exato do cliente) */
-  --brand: #376c76;
-  --brand-deep: #376c76;
-  --primary: #376c76;
-  --primary-foreground: #ffffff;
+  --card: var(--branco);
+  --card-foreground: var(--preto);
 
-  /* Mist — tingido de azul (não cinza neutro), pra trazer mais o tom da
+  /* Destaque — único tom de marca (azul-escuro), com o preto reservado
+     pra sombra/hover mais profundo. */
+  --brand: var(--azul-escuro);
+  --brand-deep: var(--preto);
+  --primary: var(--azul-escuro);
+  --primary-foreground: var(--branco);
+
+  /* Mist — tingido de azul-claro sobre o branco, pra trazer o tom da
      marca nas bandas de seção, cards de ícone e badges. */
-  --mist: #eaf2f2;
-  --mist-deep: #d9e8e9;
-  --secondary: #eaf2f2;
-  --secondary-foreground: #1a1a1a;
+  --mist: color-mix(in srgb, var(--azul-claro) 22%, var(--branco));
+  --mist-deep: color-mix(in srgb, var(--azul-claro) 40%, var(--branco));
+  --secondary: var(--mist);
+  --secondary-foreground: var(--preto);
 
-  --muted: #eef4f4;
-  --muted-foreground: #4c6266;
+  --muted: color-mix(in srgb, var(--azul-claro) 14%, var(--branco));
+  --muted-foreground: var(--azul-escuro);
 
-  --accent: #eaf2f2;
-  --accent-foreground: #1a1a1a;
+  --accent: var(--mist);
+  --accent-foreground: var(--preto);
 
-  --border: #d8e6e7;
-  --ring: #376c76;
+  --border: color-mix(in srgb, var(--azul-claro) 45%, var(--branco));
+  --ring: var(--azul-escuro);
 
   --radius: 0.85rem;
   color-scheme: light;
@@ -68,12 +90,14 @@
   --radius-lg: calc(var(--radius) - 0.25rem);
   --radius-md: calc(var(--radius) - 0.35rem);
 
-  /* Serifada itálica de destaque (títulos), com Georgia como fallback de
-     mesma "família" de proporções — evita FOUT muito brusco. */
-  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  /* Creato Display é uma fonte comercial (sem CDN livre) — o stack já
-     cai para Inter (carregada do Google Fonts) até que os arquivos da
-     fonte licenciada sejam adicionados em public/fonts. */
+  /* Iwona Light — fonte de títulos e letreiros em caixa alta (identidade
+     nova do cliente), auto-hospedada em public/fonts. Fallback humanista
+     de proporções próximas, não serifado. */
+  --font-serif: 'Iwona Light', 'Century Gothic', Futura, ui-sans-serif, sans-serif;
+  /* Corpo de texto — mantido (não trocado). Creato Display é uma fonte
+     comercial (sem CDN livre) — o stack já cai para Inter (carregada do
+     Google Fonts) até que os arquivos da fonte licenciada sejam
+     adicionados em public/fonts. */
   --font-sans: 'Creato Display', 'Inter', ui-sans-serif, system-ui, sans-serif;
 }
 

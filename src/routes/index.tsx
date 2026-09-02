@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Calendar, MapPin, ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react'
-import { useEffect, useState, type PointerEvent } from 'react'
+import { useEffect, useState } from 'react'
 import { useActiveSection } from '~/hooks/useActiveSection'
 import { Reveal } from '~/components/Reveal'
 import { GrowthRail, SECTION_IDS } from '~/components/GrowthRail'
@@ -91,99 +91,37 @@ function Home() {
       <SiteHeader />
       <GrowthRail />
 
-      {/* HERO */}
-      <section
-        id="topo"
-        onPointerMove={handleHeroPointerMove}
-        className="group relative overflow-hidden"
-      >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 [background:radial-gradient(600px_circle_at_var(--spot-x,50%)_var(--spot-y,50%),rgba(55,108,118,0.12),transparent_70%)]"
-        />
+      {/* HERO — foto de estúdio num painel curto e panorâmico (2.1:1),
+          ocupando a largura toda, sem degradê: o homem fica à direita do
+          quadro (fundo cinza contínuo até a borda esquerda) e o texto
+          fica sobreposto do lado esquerdo, a partir do breakpoint xl
+          (onde há altura de sobra). Em telas menores vira um bloco normal
+          abaixo da imagem. A transição pro conteúdo seguinte é uma sombra
+          suave (sem faixa de cor) — a foto "flutua" sobre a seção. */}
+      <section id="topo" className="relative">
+        <div className="relative aspect-[2.1/1] w-full overflow-hidden shadow-[0_32px_40px_-28px_rgba(19,26,30,0.45)]">
+          <img
+            src="/images/hero-lorenzo.webp"
+            alt="Dr. Lorenzo Noronha, cirurgião-dentista especialista em Implantodontia, em estúdio"
+            className="block size-full object-cover"
+          />
+        </div>
 
-        <div className="relative mx-auto grid max-w-6xl gap-8 px-6 py-16 sm:px-8 md:grid-cols-[1fr_1.1fr] md:items-center md:gap-6 md:py-20 lg:gap-10 lg:py-24">
-          <div className="order-2 md:order-1">
-            <div
-              style={{ animationDelay: '0ms' }}
-              className="animate-fade-up inline-flex flex-wrap items-center gap-2 rounded-full border border-brand/35 bg-card/80 px-4 py-1.5 text-xs font-semibold tracking-wide text-brand-deep backdrop-blur"
-            >
-              <span className="tabular-nums">{CRO}</span>
-              <span aria-hidden="true" className="size-1 rounded-full bg-brand-deep/50" />
-              Especialista em Implantodontia
-            </div>
-
-            <h1
-              style={{ animationDelay: '90ms' }}
-              className="text-balance animate-fade-up mt-5 font-serif text-4xl leading-[1.08] font-medium tracking-tight text-foreground italic md:text-6xl"
-            >
-              Segurança para sorrir, resultados feitos para durar.
-            </h1>
-            <p
-              style={{ animationDelay: '180ms' }}
-              className="animate-fade-up mt-6 max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg"
-            >
-              Acredito que devolver um sorriso vai muito além da estética. É
-              devolver <strong className="font-semibold text-foreground">segurança para falar</strong>,{' '}
-              <strong className="font-semibold text-foreground">liberdade para sorrir</strong> e qualidade
-              de vida para viver cada momento com confiança.
-            </p>
-            <div
-              style={{ animationDelay: '270ms' }}
-              className="animate-fade-up mt-8 flex flex-wrap items-center gap-4"
-            >
-              <a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-shine inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-medium text-primary-foreground shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] motion-reduce:hover:scale-100"
-              >
-                <Calendar className="size-5" aria-hidden="true" />
-                Agendar avaliação
-              </a>
-              <a
-                href="#servicos"
-                className="group/cta inline-flex items-center gap-1.5 rounded-xl px-4 py-3.5 font-medium text-brand-deep underline-offset-4 hover:underline"
-              >
-                Conhecer os atendimentos
-                <ArrowRight className="size-4 transition-transform group-hover/cta:translate-x-0.5" aria-hidden="true" />
-              </a>
-            </div>
-
-            <ul
-              style={{ animationDelay: '360ms' }}
-              className="animate-fade-up mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6 text-sm text-muted-foreground"
-            >
-              {['Planejamento individualizado', 'Tecnologia e técnica moderna', 'Atendimento exclusivo e humanizado'].map(
-                (item) => (
-                  <li key={item} className="flex items-center gap-2">
-                    <span className="size-1.5 shrink-0 rounded-full bg-brand" aria-hidden="true" />
-                    {item}
-                  </li>
-                ),
-              )}
-            </ul>
+        <div className="absolute inset-0 hidden items-center xl:flex">
+          <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
+            <HeroCopy compact className="max-w-md" />
           </div>
+        </div>
 
-          <div
-            style={{ animationDelay: '140ms' }}
-            className="animate-fade-up order-1 flex justify-center md:order-2"
-          >
-            <div className="relative mx-auto flex w-full max-w-md items-center justify-center md:max-w-lg lg:max-w-xl">
-              <img
-                src="/images/hero-lorenzo.webp"
-                alt="Dr. Lorenzo Noronha, cirurgião-dentista especialista em Implantodontia"
-                className="relative w-[94%] [filter:drop-shadow(0_20px_16px_rgba(20,20,20,0.14))_drop-shadow(0_40px_45px_rgba(20,20,20,0.16))]"
-              />
-            </div>
-          </div>
+        <div className="mx-auto max-w-6xl px-6 py-12 sm:px-8 xl:hidden">
+          <HeroCopy className="max-w-lg" />
         </div>
       </section>
 
       {/* SERVIÇOS — em destaque, logo após o hero */}
       <section id="servicos" className="mx-auto max-w-4xl px-6 py-16 sm:px-8 md:py-24">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance font-serif text-3xl font-medium tracking-tight italic md:text-4xl">
+          <h2 className="text-balance font-serif text-3xl font-medium tracking-tight md:text-4xl">
             Soluções completas para recuperar sua saúde bucal
           </h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
@@ -218,7 +156,7 @@ function Home() {
 
             <div>
               <Reveal>
-                <h2 className="text-balance font-serif text-3xl font-medium tracking-tight italic md:text-4xl">
+                <h2 className="text-balance font-serif text-3xl font-medium tracking-tight md:text-4xl">
                   Mais do que reabilitar sorrisos, meu compromisso é oferecer segurança e previsibilidade
                 </h2>
               </Reveal>
@@ -258,7 +196,7 @@ function Home() {
       <section id="agendar" className="border-t border-border">
         <div className="mx-auto max-w-4xl px-6 py-16 text-center sm:px-8 md:py-24">
           <Reveal>
-            <h2 className="text-balance font-serif text-3xl font-medium tracking-tight italic md:text-4xl">
+            <h2 className="text-balance font-serif text-3xl font-medium tracking-tight md:text-4xl">
               Vamos cuidar do seu sorriso, com segurança.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
@@ -313,7 +251,7 @@ function Home() {
       <section id="localizacao" className="border-t border-border">
         <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8 md:py-24">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <h2 className="text-balance font-serif text-3xl font-medium tracking-tight italic md:text-4xl">
+            <h2 className="text-balance font-serif text-3xl font-medium tracking-tight md:text-4xl">
               Duas unidades para atender você
             </h2>
           </Reveal>
@@ -330,7 +268,7 @@ function Home() {
                   <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand-deep transition-transform duration-300 group-hover:scale-110">
                     <IconPin className="size-5" />
                   </span>
-                  <h3 className="font-serif text-2xl font-medium italic">
+                  <h3 className="font-serif text-2xl font-medium">
                     {unit.city}
                   </h3>
                 </div>
@@ -362,10 +300,81 @@ function Home() {
   )
 }
 
-function handleHeroPointerMove(event: PointerEvent<HTMLElement>) {
-  const rect = event.currentTarget.getBoundingClientRect()
-  event.currentTarget.style.setProperty('--spot-x', `${event.clientX - rect.left}px`)
-  event.currentTarget.style.setProperty('--spot-y', `${event.clientY - rect.top}px`)
+/** Bloco de texto do hero — reaproveitado como overlay sobre a foto (lg+,
+ * onde a faixa panorâmica é mais baixa e precisa de um texto mais
+ * compacto, sem a lista de diferenciais) e como bloco normal, no tamanho
+ * cheio, abaixo da foto em telas menores. */
+function HeroCopy({
+  className = '',
+  compact = false,
+}: Readonly<{ className?: string; compact?: boolean }>) {
+  return (
+    <div className={className}>
+      <div
+        style={{ animationDelay: '0ms' }}
+        className="animate-fade-up inline-flex flex-wrap items-center gap-2 rounded-full border border-brand/35 bg-card/80 px-4 py-1.5 text-xs font-semibold tracking-wide text-brand-deep backdrop-blur"
+      >
+        <span className="tabular-nums">{CRO}</span>
+        <span aria-hidden="true" className="size-1 rounded-full bg-brand-deep/50" />
+        Especialista em Implantodontia
+      </div>
+
+      <h1
+        style={{ animationDelay: '90ms' }}
+        className={`text-balance animate-fade-up mt-4 font-serif leading-[1.08] font-medium tracking-tight text-foreground ${
+          compact ? 'text-3xl lg:text-4xl xl:text-5xl' : 'text-4xl md:text-5xl lg:text-6xl'
+        }`}
+      >
+        Segurança para sorrir, resultados feitos para durar.
+      </h1>
+      <p
+        style={{ animationDelay: '180ms' }}
+        className={`animate-fade-up mt-4 max-w-lg text-base leading-relaxed text-muted-foreground ${compact ? '' : 'md:text-lg'}`}
+      >
+        Acredito que devolver um sorriso vai muito além da estética. É
+        devolver <strong className="font-semibold text-foreground">segurança para falar</strong>,{' '}
+        <strong className="font-semibold text-foreground">liberdade para sorrir</strong> e qualidade de
+        vida para viver cada momento com confiança.
+      </p>
+      <div
+        style={{ animationDelay: '270ms' }}
+        className={`animate-fade-up flex flex-wrap items-center gap-3 ${compact ? 'mt-5' : 'mt-8'}`}
+      >
+        <a
+          href={WHATSAPP_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-shine inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-medium text-primary-foreground shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] motion-reduce:hover:scale-100"
+        >
+          <Calendar className="size-5" aria-hidden="true" />
+          Agendar avaliação
+        </a>
+        <a
+          href="#servicos"
+          className="group/cta inline-flex items-center gap-1.5 rounded-xl px-4 py-3.5 font-medium text-brand-deep underline-offset-4 hover:underline"
+        >
+          Conhecer os atendimentos
+          <ArrowRight className="size-4 transition-transform group-hover/cta:translate-x-0.5" aria-hidden="true" />
+        </a>
+      </div>
+
+      {!compact && (
+        <ul
+          style={{ animationDelay: '360ms' }}
+          className="animate-fade-up mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6 text-sm text-muted-foreground"
+        >
+          {['Planejamento individualizado', 'Tecnologia e técnica moderna', 'Atendimento exclusivo e humanizado'].map(
+            (item) => (
+              <li key={item} className="flex items-center gap-2">
+                <span className="size-1.5 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+                {item}
+              </li>
+            ),
+          )}
+        </ul>
+      )}
+    </div>
+  )
 }
 
 function SiteHeader() {
@@ -404,12 +413,20 @@ function SiteHeader() {
           scrolled ? 'py-3' : 'py-4'
         }`}
       >
-        <a href="#topo" className="leading-tight">
-          <span className="font-serif text-lg font-medium tracking-tight italic">
-            Lorenzo <span className="text-brand-deep">Noronha</span>
-          </span>
-          <span className="hidden text-[11px] font-medium tracking-[0.16em] text-muted-foreground uppercase sm:block">
-            Implantodontia
+        <a href="#topo" className="flex items-center gap-2.5 leading-tight">
+          <img
+            src="/images/logo-icon.webp"
+            alt=""
+            aria-hidden="true"
+            className="h-8 w-auto shrink-0 sm:h-9"
+          />
+          <span className="flex flex-col">
+            <span className="font-serif text-lg font-medium tracking-tight">
+              Lorenzo <span className="text-brand-deep">Noronha</span>
+            </span>
+            <span className="hidden font-serif text-[11px] font-medium tracking-[0.16em] text-muted-foreground uppercase sm:block">
+              Implantodontia
+            </span>
           </span>
         </a>
 
@@ -502,10 +519,13 @@ function SiteFooter() {
     <footer className="border-t border-border">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 sm:px-8 md:grid-cols-3">
         <Reveal>
-          <p className="font-serif text-lg font-medium italic">
-            Lorenzo <span className="text-brand-deep">Noronha</span>
-          </p>
-          <p className="mt-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">
+          <div className="flex items-center gap-2.5">
+            <img src="/images/logo-icon.webp" alt="" aria-hidden="true" className="h-8 w-auto shrink-0" />
+            <p className="font-serif text-lg font-medium">
+              Lorenzo <span className="text-brand-deep">Noronha</span>
+            </p>
+          </div>
+          <p className="mt-2 font-serif text-xs font-medium tracking-wide text-muted-foreground uppercase">
             Implantodontia · <span className="tabular-nums normal-case">{CRO}</span>
           </p>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
@@ -515,7 +535,7 @@ function SiteFooter() {
         </Reveal>
 
         <Reveal delay={100}>
-          <p className="text-sm font-semibold tracking-wide text-foreground uppercase">
+          <p className="font-serif text-sm font-semibold tracking-wide text-foreground uppercase">
             Navegação
           </p>
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
@@ -530,7 +550,7 @@ function SiteFooter() {
         </Reveal>
 
         <Reveal delay={200}>
-          <p className="text-sm font-semibold tracking-wide text-foreground uppercase">
+          <p className="font-serif text-sm font-semibold tracking-wide text-foreground uppercase">
             Contato
           </p>
           <div className="mt-3 flex gap-3">

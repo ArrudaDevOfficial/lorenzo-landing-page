@@ -37,7 +37,7 @@ export const Route = createRootRoute({
       },
       { property: 'og:locale', content: 'pt_BR' },
       // Fundo do site é sempre branco (não segue o dark mode do sistema).
-      { name: 'theme-color', content: '#ffffff' },
+      { name: 'theme-color', content: '#f2f4f3' },
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
@@ -48,12 +48,21 @@ export const Route = createRootRoute({
         crossOrigin: 'anonymous',
       },
       {
-        // Playfair Display (só itálico, para os títulos) + Inter (fallback
-        // real de 'Creato Display' — fonte comercial, ver styles.css).
+        // Inter (fallback real de 'Creato Display' — fonte comercial, ver
+        // styles.css). Iwona Light (títulos) é auto-hospedada via
+        // @font-face em styles.css.
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600;1,700;1,800&family=Inter:wght@400;500;600;700;800&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
       },
-      { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+      {
+        rel: 'preload',
+        href: '/fonts/IwonaLight-Regular.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous',
+      },
+      { rel: 'icon', href: '/favicon.png', type: 'image/png' },
+      { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
     ],
   }),
   shellComponent: RootDocument,

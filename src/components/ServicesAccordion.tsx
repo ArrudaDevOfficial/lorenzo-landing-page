@@ -47,7 +47,7 @@ export function ServicesAccordion({ services }: Readonly<{ services: Service[] }
                 >
                   <service.icon className="size-7" />
                 </span>
-                <span className="flex-1 font-serif text-2xl font-medium tracking-tight text-foreground italic sm:text-3xl">
+                <span className="flex-1 font-serif text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
                   {service.title}
                 </span>
                 <ChevronDown

@@ -1,23 +1,23 @@
 /**
- * Ícones originais em SVG — traço neutro (preto/cinza) para o desenho
- * base do dente, com a cor de destaque (#376c76) reservada só para o
- * detalhe (parafuso, coração, linha de extração), como pede a paleta
+ * Ícones originais em SVG — traço neutro (preto) para o desenho base do
+ * dente, com o azul-escuro da marca reservado só para o detalhe
+ * (parafuso, coração, linha de extração), como pede a paleta
  * "preto e branco + um único acento".
  */
 
-const iconStroke = '#1a1a1a'
+const iconStroke = 'var(--preto)'
 /** Tom de destaque (parafuso, coração, linha de extração) — único acento
  * da marca, usado com parcimônia. */
-const iconAccent = '#376c76'
+const iconAccent = 'var(--azul-escuro)'
 
 /** Implante — dente com parafuso de implante */
 export function IconImplante({ className }: Readonly<{ className?: string }>) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
-      <circle cx="60" cy="60" r="54" fill="#eaf2f2" />
+      <circle cx="60" cy="60" r="54" fill="var(--mist)" />
       <path
         d="M60 30 C40 30 34 44 38 58 C40 66 36 72 38 82 C40 90 48 92 52 84 C54 80 58 80 60 84 C64 92 74 90 76 80 C78 70 76 64 78 58 C82 44 80 30 60 30 Z"
-        fill="#ffffff"
+        fill="var(--card)"
         stroke={iconStroke}
         strokeWidth="2.5"
       />
@@ -29,7 +29,7 @@ export function IconImplante({ className }: Readonly<{ className?: string }>) {
       />
       <path
         d="M54 90 L66 90 M53 96 L67 96 M54 102 L66 102"
-        stroke="#ffffff"
+        stroke="var(--card)"
         strokeWidth="2"
       />
     </svg>
@@ -40,10 +40,10 @@ export function IconImplante({ className }: Readonly<{ className?: string }>) {
 export function IconSisos({ className }: Readonly<{ className?: string }>) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
-      <circle cx="60" cy="60" r="54" fill="#d9e8e9" />
+      <circle cx="60" cy="60" r="54" fill="var(--mist-deep)" />
       <path
         d="M42 36 C34 36 30 46 32 56 C33 62 30 66 31 74 C32 82 40 84 44 76 C46 72 50 72 52 76 C56 84 64 84 66 76 C68 72 72 72 74 76 C78 84 86 82 87 74 C88 66 85 62 86 56 C88 46 84 36 76 36 C68 40 58 42 60 42 C60 42 50 40 42 36 Z"
-        fill="#ffffff"
+        fill="var(--card)"
         stroke={iconStroke}
         strokeWidth="2.5"
       />
@@ -62,7 +62,7 @@ export function IconSisos({ className }: Readonly<{ className?: string }>) {
 export function IconProtocolo({ className }: Readonly<{ className?: string }>) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
-      <circle cx="60" cy="60" r="54" fill="#eaf2f2" />
+      <circle cx="60" cy="60" r="54" fill="var(--mist)" />
       <path
         d="M30 66 Q60 40 90 66"
         stroke={iconStroke}
@@ -77,7 +77,7 @@ export function IconProtocolo({ className }: Readonly<{ className?: string }>) {
           width="10"
           height="22"
           rx="4"
-          fill="#ffffff"
+          fill="var(--card)"
           stroke={iconStroke}
           strokeWidth="2"
         />
@@ -96,7 +96,7 @@ export function IconProtocolo({ className }: Readonly<{ className?: string }>) {
 export function IconProtese({ className }: Readonly<{ className?: string }>) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
-      <circle cx="60" cy="60" r="54" fill="#d9e8e9" />
+      <circle cx="60" cy="60" r="54" fill="var(--mist-deep)" />
       <path
         d="M28 52 C28 74 42 88 60 88 C78 88 92 74 92 52"
         fill="none"
@@ -105,7 +105,7 @@ export function IconProtese({ className }: Readonly<{ className?: string }>) {
       />
       <path
         d="M30 50 C30 70 44 82 60 82 C76 82 90 70 90 50 C90 46 86 44 82 46 C78 48 76 52 72 50 C68 48 66 44 62 46 C58 48 58 52 54 50 C50 48 50 44 46 46 C42 48 40 52 36 50 C32 48 30 46 30 50 Z"
-        fill="#ffffff"
+        fill="var(--card)"
         stroke={iconStroke}
         strokeWidth="2"
       />
@@ -119,10 +119,10 @@ export function IconIntegrada({
 }: Readonly<{ className?: string }>) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
-      <circle cx="60" cy="60" r="54" fill="#eaf2f2" />
+      <circle cx="60" cy="60" r="54" fill="var(--mist)" />
       <path
         d="M60 32 C42 32 36 46 39 58 C41 68 37 74 39 84 C41 92 49 93 52 85 C54 80 58 80 60 85 C63 93 71 92 73 84 C75 74 71 68 73 58 C76 46 78 32 60 32 Z"
-        fill="#ffffff"
+        fill="var(--card)"
         stroke={iconStroke}
         strokeWidth="2.5"
       />
