@@ -115,7 +115,7 @@ function Home() {
 
         <div className="absolute inset-0 flex items-center">
           <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
-            <HeroCopy className="max-w-[10.5rem] sm:max-w-xs lg:max-w-md" />
+            <HeroCopy className="max-w-[10.5rem] sm:max-w-xs md:max-w-sm lg:max-w-md" />
           </div>
         </div>
       </section>
@@ -312,11 +312,11 @@ function HeroCopy({ className = '' }: Readonly<{ className?: string }>) {
     <div className={className}>
       <div
         style={{ animationDelay: '0ms' }}
-        className="animate-fade-up inline-flex flex-wrap items-center gap-1.5 rounded-full border border-brand/35 bg-card/80 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-brand-deep backdrop-blur sm:gap-2 sm:px-4 sm:py-1.5 sm:text-xs"
+        className="animate-fade-up inline-flex flex-nowrap items-center gap-1.5 rounded-full border border-brand/35 bg-card/80 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-nowrap text-brand-deep backdrop-blur md:gap-2 md:px-4 md:py-1.5 md:text-xs"
       >
         <span className="tabular-nums">{CRO}</span>
-        <span aria-hidden="true" className="hidden size-1 rounded-full bg-brand-deep/50 sm:block" />
-        <span className="hidden sm:inline">Especialista em Implantodontia</span>
+        <span aria-hidden="true" className="hidden size-1 rounded-full bg-brand-deep/50 md:block" />
+        <span className="hidden md:inline">Especialista em Implantodontia</span>
       </div>
 
       <h1
