@@ -91,30 +91,32 @@ function Home() {
       <SiteHeader />
       <GrowthRail />
 
-      {/* HERO — foto de estúdio num painel curto e panorâmico (2.1:1),
-          ocupando a largura toda, sem degradê: o homem fica à direita do
-          quadro (fundo cinza contínuo até a borda esquerda) e o texto
-          fica sobreposto do lado esquerdo, a partir do breakpoint xl
-          (onde há altura de sobra). Em telas menores vira um bloco normal
-          abaixo da imagem. A transição pro conteúdo seguinte é uma sombra
-          suave (sem faixa de cor) — a foto "flutua" sobre a seção. */}
+      {/* HERO — foto de estúdio ocupando a largura toda, sem degradê: o
+          homem fica à direita do quadro (fundo cinza contínuo até a borda
+          esquerda) e o texto fica sobreposto do lado esquerdo em todas as
+          telas, inclusive no mobile. Duas fotos recortadas especificamente
+          pra cada proporção (ambas com a mesma técnica de fundo estendido
+          sem costura): uma mais alta (4:3) até `lg`, com uma faixa cinza
+          larga o bastante pro texto compacto caber ao lado dele mesmo em
+          telas estreitas; e a panorâmica (2.1:1) a partir do desktop. A
+          transição pro conteúdo seguinte é uma sombra suave (sem faixa de
+          cor) — a foto "flutua" sobre a seção. */}
       <section id="topo" className="relative">
-        <div className="relative aspect-[2.1/1] w-full overflow-hidden shadow-[0_32px_40px_-28px_rgba(19,26,30,0.45)]">
-          <img
-            src="/images/hero-lorenzo.webp"
-            alt="Dr. Lorenzo Noronha, cirurgião-dentista especialista em Implantodontia, em estúdio"
-            className="block size-full object-cover"
-          />
+        <div className="relative aspect-[4/3] w-full overflow-hidden shadow-[0_32px_40px_-28px_rgba(19,26,30,0.45)] lg:aspect-[2.1/1]">
+          <picture>
+            <source media="(min-width: 1024px)" srcSet="/images/hero-lorenzo.webp" />
+            <img
+              src="/images/hero-lorenzo-mobile.webp"
+              alt="Dr. Lorenzo Noronha, cirurgião-dentista especialista em Implantodontia, em estúdio"
+              className="block size-full object-cover"
+            />
+          </picture>
         </div>
 
-        <div className="absolute inset-0 hidden items-center xl:flex">
+        <div className="absolute inset-0 flex items-center">
           <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
-            <HeroCopy compact className="max-w-md" />
+            <HeroCopy className="max-w-[10.5rem] sm:max-w-xs lg:max-w-md" />
           </div>
-        </div>
-
-        <div className="mx-auto max-w-6xl px-6 py-12 sm:px-8 xl:hidden">
-          <HeroCopy className="max-w-lg" />
         </div>
       </section>
 
@@ -300,36 +302,32 @@ function Home() {
   )
 }
 
-/** Bloco de texto do hero — reaproveitado como overlay sobre a foto (lg+,
- * onde a faixa panorâmica é mais baixa e precisa de um texto mais
- * compacto, sem a lista de diferenciais) e como bloco normal, no tamanho
- * cheio, abaixo da foto em telas menores. */
-function HeroCopy({
-  className = '',
-  compact = false,
-}: Readonly<{ className?: string; compact?: boolean }>) {
+/** Bloco de texto do hero — sempre sobreposto à foto (a faixa do topo é
+ * panorâmica mesmo no mobile), então o texto é compacto em todas as
+ * telas, com escala mobile-first: bem enxuto no celular (sem o parágrafo,
+ * que não cabe na coluna estreita) e crescendo gradualmente até o
+ * desktop, onde há mais espaço na foto. */
+function HeroCopy({ className = '' }: Readonly<{ className?: string }>) {
   return (
     <div className={className}>
       <div
         style={{ animationDelay: '0ms' }}
-        className="animate-fade-up inline-flex flex-wrap items-center gap-2 rounded-full border border-brand/35 bg-card/80 px-4 py-1.5 text-xs font-semibold tracking-wide text-brand-deep backdrop-blur"
+        className="animate-fade-up inline-flex flex-wrap items-center gap-1.5 rounded-full border border-brand/35 bg-card/80 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-brand-deep backdrop-blur sm:gap-2 sm:px-4 sm:py-1.5 sm:text-xs"
       >
         <span className="tabular-nums">{CRO}</span>
-        <span aria-hidden="true" className="size-1 rounded-full bg-brand-deep/50" />
-        Especialista em Implantodontia
+        <span aria-hidden="true" className="hidden size-1 rounded-full bg-brand-deep/50 sm:block" />
+        <span className="hidden sm:inline">Especialista em Implantodontia</span>
       </div>
 
       <h1
         style={{ animationDelay: '90ms' }}
-        className={`text-balance animate-fade-up mt-4 font-serif leading-[1.08] font-medium tracking-tight text-foreground ${
-          compact ? 'text-3xl lg:text-4xl xl:text-5xl' : 'text-4xl md:text-5xl lg:text-6xl'
-        }`}
+        className="text-balance animate-fade-up mt-3 font-serif leading-[1.1] font-medium tracking-tight text-foreground sm:mt-4 sm:text-2xl sm:leading-[1.08] md:text-3xl lg:text-4xl xl:text-5xl text-xl"
       >
         Segurança para sorrir, resultados feitos para durar.
       </h1>
       <p
         style={{ animationDelay: '180ms' }}
-        className={`animate-fade-up mt-4 max-w-lg text-base leading-relaxed text-muted-foreground ${compact ? '' : 'md:text-lg'}`}
+        className="animate-fade-up mt-3 hidden max-w-lg text-sm leading-relaxed text-muted-foreground sm:mt-4 sm:block lg:text-base"
       >
         Acredito que devolver um sorriso vai muito além da estética. É
         devolver <strong className="font-semibold text-foreground">segurança para falar</strong>,{' '}
@@ -338,41 +336,25 @@ function HeroCopy({
       </p>
       <div
         style={{ animationDelay: '270ms' }}
-        className={`animate-fade-up flex flex-wrap items-center gap-3 ${compact ? 'mt-5' : 'mt-8'}`}
+        className="animate-fade-up mt-4 flex flex-wrap items-center gap-2 sm:mt-5 sm:gap-3"
       >
         <a
           href={WHATSAPP_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-shine inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-medium text-primary-foreground shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] motion-reduce:hover:scale-100"
+          className="btn-shine inline-flex items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] motion-reduce:hover:scale-100 sm:gap-2 sm:rounded-xl sm:px-6 sm:py-3.5 sm:text-base"
         >
-          <Calendar className="size-5" aria-hidden="true" />
+          <Calendar className="size-4 sm:size-5" aria-hidden="true" />
           Agendar avaliação
         </a>
         <a
           href="#servicos"
-          className="group/cta inline-flex items-center gap-1.5 rounded-xl px-4 py-3.5 font-medium text-brand-deep underline-offset-4 hover:underline"
+          className="group/cta hidden items-center gap-1.5 rounded-xl px-4 py-3.5 font-medium text-brand-deep underline-offset-4 hover:underline sm:inline-flex"
         >
           Conhecer os atendimentos
           <ArrowRight className="size-4 transition-transform group-hover/cta:translate-x-0.5" aria-hidden="true" />
         </a>
       </div>
-
-      {!compact && (
-        <ul
-          style={{ animationDelay: '360ms' }}
-          className="animate-fade-up mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6 text-sm text-muted-foreground"
-        >
-          {['Planejamento individualizado', 'Tecnologia e técnica moderna', 'Atendimento exclusivo e humanizado'].map(
-            (item) => (
-              <li key={item} className="flex items-center gap-2">
-                <span className="size-1.5 shrink-0 rounded-full bg-brand" aria-hidden="true" />
-                {item}
-              </li>
-            ),
-          )}
-        </ul>
-      )}
     </div>
   )
 }
