@@ -43,7 +43,7 @@ const SERVICES: Service[] = [
     icon: IconImplante,
     title: 'Implantes Dentários',
     text: 'Os implantes dentários são a solução para substituir um ou mais dentes perdidos com segurança, estabilidade e naturalidade. Seja para um implante unitário ou para a reabilitação de múltiplos dentes, cada tratamento é planejado de forma individualizada para restaurar a função mastigatória, a estética e a confiança ao sorrir.',
-    image: '/images/servico-implante.webp',
+    image: '/images/servico-integrada.webp',
   },
   {
     icon: IconProtocolo,
@@ -61,7 +61,7 @@ const SERVICES: Service[] = [
     icon: IconIntegrada,
     title: 'Odontologia Integrada',
     text: 'Além da implantodontia, oferecemos um atendimento completo por meio de uma equipe de especialistas. Realizamos tratamentos como endodontia (tratamento de canal), ortodontia, odontologia estética e clínica geral, garantindo que todas as etapas do seu tratamento sejam conduzidas de forma integrada, com planejamento e acompanhamento em um único lugar.',
-    image: '/images/servico-integrada.webp',
+    image: '/images/servico-implante.webp',
   },
 ]
 
@@ -102,13 +102,13 @@ function Home() {
           transição pro conteúdo seguinte é uma sombra suave (sem faixa de
           cor) — a foto "flutua" sobre a seção. */}
       <section id="topo" className="relative">
-        <div className="relative aspect-[4/3] w-full overflow-hidden shadow-[0_32px_40px_-28px_rgba(19,26,30,0.45)] xl:aspect-[2.1/1]">
+        <div className="relative aspect-[4/3] w-full overflow-hidden shadow-[0_32px_40px_-28px_rgba(19,26,30,0.45)] xl:aspect-[1.85/1]">
           <picture>
             <source media="(min-width: 1280px)" srcSet="/images/hero-lorenzo.webp" />
             <img
               src="/images/hero-lorenzo-mobile.webp"
               alt="Dr. Lorenzo Noronha, cirurgião-dentista especialista em Implantodontia, em estúdio"
-              className="block size-full object-cover"
+              className="block size-full object-cover object-right"
             />
           </picture>
         </div>
