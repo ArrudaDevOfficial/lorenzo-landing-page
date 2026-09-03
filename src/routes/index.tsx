@@ -115,7 +115,7 @@ function Home() {
 
         <div className="absolute inset-0 flex items-center">
           <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
-            <HeroCopy className="max-w-[10.5rem] sm:max-w-xs md:max-w-sm lg:max-w-md" />
+            <HeroCopy className="max-w-[10.5rem] sm:max-w-xs md:max-w-sm lg:max-w-md xl:max-w-[clamp(28rem,20rem_+_10vw,36rem)]" />
           </div>
         </div>
       </section>
@@ -312,7 +312,7 @@ function HeroCopy({ className = '' }: Readonly<{ className?: string }>) {
     <div className={className}>
       <div
         style={{ animationDelay: '0ms' }}
-        className="animate-fade-up inline-flex flex-nowrap items-center gap-1.5 rounded-full border border-brand/35 bg-card/80 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-nowrap text-brand-deep backdrop-blur md:gap-2 md:px-4 md:py-1.5 md:text-xs"
+        className="animate-fade-up inline-flex flex-nowrap items-center gap-1.5 rounded-full border border-brand/35 bg-card/80 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-nowrap text-brand-deep backdrop-blur md:gap-2 md:px-4 md:py-1.5 md:text-xs 2xl:px-5 2xl:py-2 2xl:text-sm"
       >
         <span className="tabular-nums">{CRO}</span>
         <span aria-hidden="true" className="hidden size-1 rounded-full bg-brand-deep/50 md:block" />
@@ -321,13 +321,13 @@ function HeroCopy({ className = '' }: Readonly<{ className?: string }>) {
 
       <h1
         style={{ animationDelay: '90ms' }}
-        className="text-balance animate-fade-up mt-3 font-serif leading-[1.1] font-medium tracking-tight text-foreground sm:mt-4 sm:text-2xl sm:leading-[1.08] md:text-3xl lg:text-4xl xl:text-5xl text-xl"
+        className="text-balance animate-fade-up mt-3 font-serif leading-[1.1] font-medium tracking-tight text-foreground sm:mt-4 sm:text-2xl sm:leading-[1.08] md:text-3xl lg:text-4xl xl:text-[clamp(3rem,0.5rem_+_3.125vw,5.5rem)] text-xl"
       >
         Segurança para sorrir, resultados feitos para durar.
       </h1>
       <p
         style={{ animationDelay: '180ms' }}
-        className="animate-fade-up mt-3 hidden max-w-lg text-sm leading-relaxed text-muted-foreground sm:mt-4 sm:block lg:text-base"
+        className="animate-fade-up mt-3 hidden text-sm leading-relaxed text-muted-foreground sm:mt-4 sm:block lg:text-base xl:max-w-[clamp(32rem,24rem_+_10vw,40rem)] xl:text-[clamp(1rem,0.75rem_+_0.3125vw,1.25rem)] max-w-lg"
       >
         Acredito que devolver um sorriso vai muito além da estética. É
         devolver <strong className="font-semibold text-foreground">segurança para falar</strong>,{' '}
@@ -342,17 +342,17 @@ function HeroCopy({ className = '' }: Readonly<{ className?: string }>) {
           href={WHATSAPP_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-shine inline-flex items-center gap-1 rounded-md bg-primary px-2.5 py-1.5 text-xs font-medium text-primary-foreground shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] motion-reduce:hover:scale-100 sm:gap-2 sm:rounded-xl sm:px-6 sm:py-3.5 sm:text-base"
+          className="btn-shine inline-flex items-center gap-1 rounded-md bg-primary px-2.5 py-1.5 text-xs font-medium text-primary-foreground shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] motion-reduce:hover:scale-100 sm:gap-2 sm:rounded-xl sm:px-6 sm:py-3.5 sm:text-base 2xl:px-8 2xl:py-4 2xl:text-lg"
         >
-          <Calendar className="size-3.5 sm:size-5" aria-hidden="true" />
+          <Calendar className="size-3.5 sm:size-5 2xl:size-6" aria-hidden="true" />
           Agendar avaliação
         </a>
         <a
           href="#servicos"
-          className="group/cta hidden items-center gap-1.5 rounded-xl px-4 py-3.5 font-medium text-brand-deep underline-offset-4 hover:underline sm:inline-flex"
+          className="group/cta hidden items-center gap-1.5 rounded-xl px-4 py-3.5 font-medium text-brand-deep underline-offset-4 hover:underline sm:inline-flex 2xl:text-lg"
         >
           Conhecer os atendimentos
-          <ArrowRight className="size-4 transition-transform group-hover/cta:translate-x-0.5" aria-hidden="true" />
+          <ArrowRight className="size-4 transition-transform group-hover/cta:translate-x-0.5 2xl:size-5" aria-hidden="true" />
         </a>
       </div>
     </div>
