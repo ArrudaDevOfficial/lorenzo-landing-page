@@ -70,11 +70,13 @@ const UNITS = [
     city: 'Santo Ângelo',
     address: 'R. Vinte e Cinco de Julho, 350 — Centro, Santo Ângelo/RS, 98801-670',
     detail: '2º andar, ao lado do Restaurante do Chico',
+    mapsHref: 'https://maps.app.goo.gl/FNGYPFULrUAkSBWaA',
   },
   {
     city: 'São Miguel das Missões',
-    address: 'Rua Santo Ângelo, 1113 — São Miguel das Missões/RS',
+    address: 'Rua Santo Ângelo, 1213 — São Miguel das Missões/RS, 98865-000',
     detail: 'Consultório Dra. Mariely Bedates, próximo à Prefeitura',
+    mapsHref: 'https://maps.app.goo.gl/x6qFgJnNC1cwkvZq6',
   },
 ] as const
 
@@ -282,7 +284,7 @@ function Home() {
                   {unit.detail}
                 </p>
                 <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${unit.address} ${unit.detail}`)}`}
+                  href={unit.mapsHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-brand-deep underline-offset-4 hover:underline"
