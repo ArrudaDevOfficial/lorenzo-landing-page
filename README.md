@@ -43,6 +43,6 @@ Para ativar uma foto, edite o array `SERVICES` e informe o caminho do arquivo (c
 ## Antes de publicar
 
 - [ ] Adicionar as fotos reais dos 5 serviços (veja acima) e o retrato do Dr. Lorenzo (`HeroPortrait` em `src/components/illustrations.tsx`).
-- [ ] Atualizar `WHATSAPP_NUMBER` em `src/routes/index.tsx` com o número real (formato internacional, ex: `5555988887777`).
+- [x] Atualizar `WHATSAPP_NUMBER` em `src/routes/index.tsx` com o número real (formato internacional, ex: `5555988887777`).
 - [ ] Atualizar os links de Instagram e Facebook em `src/routes/index.tsx`.
 - [ ] Confirmar endereços e horários das unidades de Santo Ângelo e São Miguel das Missões.
