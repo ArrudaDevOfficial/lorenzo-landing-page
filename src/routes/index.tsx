@@ -25,8 +25,7 @@ export const Route = createFileRoute('/')({
 
 const CRO = 'CRO/RS 29.781'
 
-// TODO: substituir pelo número real em formato internacional (ex: 5555988887777)
-const WHATSAPP_NUMBER = '5555999999999'
+const WHATSAPP_NUMBER = '5555995099955'
 const WHATSAPP_MESSAGE = encodeURIComponent(
   'Olá, Dr. Lorenzo! Gostaria de agendar uma avaliação.',
 )
