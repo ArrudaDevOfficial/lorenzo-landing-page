@@ -95,23 +95,22 @@ function Home() {
       {/* HERO — foto de estúdio ocupando a largura toda, sem degradê: o
           homem fica à direita do quadro (fundo cinza contínuo até a borda
           esquerda) e o texto fica sobreposto do lado esquerdo em todas as
-          telas, inclusive no mobile. Duas fotos recortadas especificamente
-          pra cada proporção (ambas com a mesma técnica de fundo estendido
-          sem costura): uma mais alta (4:3) até `lg`, com uma faixa cinza
-          larga o bastante pro texto compacto caber ao lado dele mesmo em
-          telas estreitas; e a panorâmica (2.1:1) a partir do desktop. A
-          transição pro conteúdo seguinte é uma sombra suave (sem faixa de
-          cor) — a foto "flutua" sobre a seção. */}
+          telas, inclusive no mobile. Uma única foto (fundo marmorado
+          editado, sem emenda) com object-cover/object-right: o container
+          é mais alto (4:3) até `lg`, com uma faixa cinza larga o bastante
+          pro texto compacto caber ao lado dele mesmo em telas estreitas;
+          e panorâmico (2.1:1) a partir do desktop — o CSS que recorta a
+          mesma imagem em cada proporção, sem precisar de um arquivo
+          separado pro mobile. A transição pro conteúdo seguinte é uma
+          sombra suave (sem faixa de cor) — a foto "flutua" sobre a
+          seção. */}
       <section id="topo" className="relative">
         <div className="relative aspect-[4/3] w-full overflow-hidden shadow-[0_32px_40px_-28px_rgba(19,26,30,0.45)] xl:aspect-[1.85/1]">
-          <picture>
-            <source media="(min-width: 1280px)" srcSet="/images/hero-lorenzo.webp" />
-            <img
-              src="/images/hero-lorenzo-mobile.webp"
-              alt="Dr. Lorenzo Noronha, cirurgião-dentista especialista em Implantodontia, em estúdio"
-              className="block size-full object-cover object-right"
-            />
-          </picture>
+          <img
+            src="/images/hero-lorenzo.webp"
+            alt="Dr. Lorenzo Noronha, cirurgião-dentista especialista em Implantodontia, em estúdio"
+            className="block size-full object-cover object-right"
+          />
         </div>
 
         <div className="absolute inset-0 flex items-center">
@@ -547,22 +546,13 @@ function SiteFooter() {
               <IconWhatsapp className="size-4" />
             </a>
             <a
-              href="https://instagram.com/"
+              href="https://www.instagram.com/drlorenzo.noronha?stkn=MWc1d2JtbmhjNnloaw=="
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Seguir no Instagram"
               className="flex size-9 items-center justify-center rounded-full border border-border text-brand-deep transition-colors hover:bg-brand/10"
             >
               <IconInstagram className="size-4" />
-            </a>
-            <a
-              href="https://facebook.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Seguir no Facebook"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-brand-deep transition-colors hover:bg-brand/10"
-            >
-              <IconFacebook className="size-4" />
             </a>
           </div>
         </Reveal>
