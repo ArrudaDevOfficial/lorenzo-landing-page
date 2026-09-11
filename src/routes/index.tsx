@@ -15,7 +15,6 @@ import {
   IconIntegrada,
   IconWhatsapp,
   IconInstagram,
-  IconFacebook,
   IconPin,
 } from '~/components/illustrations'
 
@@ -228,22 +227,13 @@ function Home() {
               <IconWhatsapp className="size-5" />
             </a>
             <a
-              href="https://instagram.com/"
+              href="https://www.instagram.com/drlorenzo.noronha?stkn=MWc1d2JtbmhjNnloaw=="
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Seguir no Instagram"
               className="flex size-11 items-center justify-center rounded-full border border-border text-brand-deep transition-colors hover:bg-brand/10"
             >
               <IconInstagram className="size-5" />
-            </a>
-            <a
-              href="https://facebook.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Seguir no Facebook"
-              className="flex size-11 items-center justify-center rounded-full border border-border text-brand-deep transition-colors hover:bg-brand/10"
-            >
-              <IconFacebook className="size-5" />
             </a>
           </Reveal>
         </div>
