@@ -25,7 +25,7 @@ export const Route = createFileRoute('/')({
 
 const CRO = 'CRO/RS 29.781'
 
-const WHATSAPP_NUMBER = '5555995099955'
+const WHATSAPP_NUMBER = '5555999519133'
 const WHATSAPP_MESSAGE = encodeURIComponent(
   'Olá, Dr. Lorenzo! Gostaria de agendar uma avaliação.',
 )
